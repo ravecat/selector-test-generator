@@ -1,0 +1,25 @@
+coverage
+data
+
+# Dependencies
+node_modules
+npm-debug.log
+
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Settings
+.git
+.gitignore
+.env
+*/bin
+*/obj
+
+# Docs
+README.md
+LICENSE
+
+# IDE
+.vscode

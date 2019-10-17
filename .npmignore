@@ -1,0 +1,16 @@
+/node_modules
+/coverage
+/build
+/app
+
+.storybook
+.vscode
+
+.env
+.env.*
+.env.*.local
+
+.npmignore
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
