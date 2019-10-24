@@ -1,0 +1,41 @@
+image: docker:stable
+
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - preparation
+  - test
+
+build_deps:
+  image: node:10.13-alpine
+  stage: preparation
+  artifacts:
+    paths:
+      - node_modules/
+    expire_in: 1h
+  tags:
+    - docker
+  dependencies: []
+  script:
+    - yarn
+
+test_module:
+  stage: test
+  tags:
+    - docker
+  dependencies: []
+  script:
+    - docker run --rm $(docker build -q .)
+
+test_lint:
+  image: node:10.13-alpine
+  stage: test
+  tags:
+    - docker
+  dependencies:
+    - build_deps
+  script:
+    - yarn lint
+    - yarn prettier
