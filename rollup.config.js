@@ -9,7 +9,7 @@ export default {
     }),
     uglify(),
   ],
-  external: ['express'],
+  external: ['commander'],
   output: {
     file: 'dist/index.js',
     format: 'cjs',

@@ -25,7 +25,7 @@
     "prebuild": "rimraf dist",
     "build": "rollup -c",
     "test": "docker run --rm $(docker build -q .)",
-    "test:generate": "node  src/index.js ./app -s ./app/state.js",
+    "test:generate": "node dist/index.js ./app -s ./app/state.js",
     "release:debug": "semantic-release --debug",
     "lint": "eslint '**/*.js'",
     "prettier": "prettier --check *"
@@ -56,6 +56,8 @@
     "rimraf": "^2.6.3",
     "rollup": "^1.1.2",
     "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-includepaths": "^0.2.3",
     "rollup-plugin-uglify": "^6.0.2",
     "semantic-release": "^15.13.18"
   },
@@ -89,6 +91,8 @@
   },
   "dependencies": {
     "@babel/parser": "^7.6.4",
-    "commander": "^3.0.2"
+    "commander": "^3.0.2",
+    "remove": "^0.1.5",
+    "selector-test-generator": "^1.0.0"
   }
 }

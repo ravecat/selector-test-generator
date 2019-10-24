@@ -2,8 +2,9 @@ require('@babel/register')({
   presets: ['@babel/preset-env'],
 });
 
-const { generate } = require('./generator');
-const program = require('commander');
+// const program = require('commander');
+import program from 'commander';
+import { generate } from './generator';
 
 let selectorsDir;
 let statePath;
@@ -28,4 +29,4 @@ program
   })
   .parse(process.argv);
 
-module.exports = generate(selectorsDir, statePath);
+generate(selectorsDir, statePath);
