@@ -5,8 +5,17 @@ cache:
     - node_modules/
 
 stages:
+  - cleaning
   - preparation
   - test
+  - release
+
+cleaning:
+  stage: cleaning
+  tags:
+    - docker
+  script:
+    - docker system prune -af
 
 build_deps:
   image: node:10.13-alpine
@@ -39,3 +48,18 @@ test_lint:
   script:
     - yarn lint
     - yarn prettier
+
+release:
+  image: node:10.13-alpine
+  stage: release
+  tags:
+    - docker
+  only:
+    - master
+  dependencies:
+    - build_deps
+  script:
+    - apk add --no-cache git
+    - yarn build
+    - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+    - GITLAB_TOKEN=$GITLAB_TOKEN yarn semantic-release
