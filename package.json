@@ -26,13 +26,16 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "rollup -c",
-    "test": "docker run --rm $(docker build -q .)",
+    "docker:build": "docker build . -t selector-test-generator",
+    "docker:run": "docker run --rm selector-test-generator",
+    "test": "yarn docker:build && yarn docker:run",
     "test:generate": "node dist/index.js ./app -s ./app/state.js",
     "release:debug": "semantic-release --debug",
     "lint": "eslint '**/*.js'",
     "prettier": "prettier --check *"
   },
   "dependencies": {
+    "@babel/core": "^7.6.4",
     "@babel/parser": "^7.6.4",
     "@babel/preset-env": "^7.6.3",
     "@babel/register": "^7.6.2",
@@ -40,7 +43,6 @@
     "outdent": "^0.7.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.5",
     "@commitlint/cli": "^8.0.0",
     "@commitlint/config-angular": "^8.0.0",
     "@semantic-release/changelog": "^3.0.4",
