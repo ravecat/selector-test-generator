@@ -4,7 +4,7 @@ module.exports = {
     '<rootDir>/**/__test__/**/*.{js,jsx,ts,tsx}',
     '<rootDir>/**/?(*.)(spec|test).{js,jsx,ts,tsx}',
   ],
-  testEnvironment: 'jsdom',
+  testEnvironment: 'node',
   testURL: 'http://localhost',
   moduleDirectories: ['node_modules'],
   transform: {

@@ -1,5 +1,7 @@
 import babel from 'rollup-plugin-babel';
-import { uglify } from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
+import commonjs from 'rollup-plugin-commonjs';
+import nodeResolve from 'rollup-plugin-node-resolve';
 
 export default {
   input: './src/index.js',
@@ -7,9 +9,10 @@ export default {
     babel({
       exclude: 'node_modules/**',
     }),
-    uglify(),
+    nodeResolve(),
+    commonjs(),
+    terser(),
   ],
-  external: ['commander'],
   output: {
     file: 'dist/index.js',
     format: 'cjs',
