@@ -32,10 +32,15 @@
     "lint": "eslint '**/*.js'",
     "prettier": "prettier --check *"
   },
+  "dependencies": {
+    "@babel/parser": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/register": "^7.6.2",
+    "commander": "^3.0.2",
+    "outdent": "^0.7.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.3.1",
-    "@babel/register": "^7.0.0",
     "@commitlint/cli": "^8.0.0",
     "@commitlint/config-angular": "^8.0.0",
     "@semantic-release/changelog": "^3.0.4",
@@ -85,10 +90,5 @@
     "cz-customizable": {
       "config": "./commitizen.config.js"
     }
-  },
-  "dependencies": {
-    "@babel/parser": "^7.6.4",
-    "commander": "^3.0.2",
-    "outdent": "^0.7.0"
   }
 }

@@ -9,10 +9,13 @@ export default {
     babel({
       exclude: 'node_modules/**',
     }),
-    nodeResolve(),
+    nodeResolve({
+      preferBuiltins: true,
+    }),
     commonjs(),
     terser(),
   ],
+  external: ['fs', 'events', 'child_process', 'util', 'path'],
   output: {
     file: 'dist/index.js',
     format: 'cjs',
