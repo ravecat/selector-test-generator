@@ -1,3 +1,10 @@
+## [1.2.1](https://gitlab.com/ravecat/selector-test-generator/compare/1.2.0...1.2.1) (2019-10-25)
+
+
+### Bug Fixes
+
+* **scripts:** update external dependencies ([ec17a05](https://gitlab.com/ravecat/selector-test-generator/commit/ec17a05))
+
 # [1.2.0](https://gitlab.com/ravecat/selector-test-generator/compare/1.1.0...1.2.0) (2019-10-25)
 
 
