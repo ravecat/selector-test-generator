@@ -5,17 +5,9 @@ cache:
     - node_modules/
 
 stages:
-  - cleaning
   - preparation
   - test
   - release
-
-cleaning:
-  stage: cleaning
-  tags:
-    - docker
-  script:
-    - docker system prune -af
 
 build_deps:
   image: node:10.13-alpine
