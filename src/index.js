@@ -2,7 +2,6 @@ require('@babel/register')({
   presets: ['@babel/preset-env'],
 });
 
-// const program = require('commander');
 import program from 'commander';
 import { generate } from './generator';
 
