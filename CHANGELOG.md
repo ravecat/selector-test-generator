@@ -1,3 +1,10 @@
+# [1.1.0](https://gitlab.com/ravecat/selector-test-generator/compare/1.0.1...1.1.0) (2019-10-25)
+
+
+### Features
+
+* **scripts:** add cli ability ([170caf9](https://gitlab.com/ravecat/selector-test-generator/commit/170caf9))
+
 ## [1.0.1](https://gitlab.com/ravecat/selector-test-generator/compare/1.0.0...1.0.1) (2019-10-24)
 
 
