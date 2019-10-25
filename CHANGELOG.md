@@ -1,3 +1,10 @@
+# [1.2.0](https://gitlab.com/ravecat/selector-test-generator/compare/1.1.0...1.2.0) (2019-10-25)
+
+
+### Features
+
+* **scripts:** add cli ability ([e5c48ea](https://gitlab.com/ravecat/selector-test-generator/commit/e5c48ea))
+
 # [1.1.0](https://gitlab.com/ravecat/selector-test-generator/compare/1.0.1...1.1.0) (2019-10-25)
 
 
