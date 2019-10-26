@@ -1,3 +1,10 @@
+## [1.2.2](https://gitlab.com/ravecat/selector-test-generator/compare/1.2.1...1.2.2) (2019-10-26)
+
+
+### Bug Fixes
+
+* **scripts:** add @babel/core to external dependecies ([e7076f1](https://gitlab.com/ravecat/selector-test-generator/commit/e7076f1))
+
 ## [1.2.1](https://gitlab.com/ravecat/selector-test-generator/compare/1.2.0...1.2.1) (2019-10-25)
 
 
