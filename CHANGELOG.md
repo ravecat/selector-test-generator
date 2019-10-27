@@ -1,3 +1,5 @@
+## [1.2.3](https://gitlab.com/ravecat/selector-test-generator/compare/1.2.2...1.2.3) (2019-10-27)
+
 ## [1.2.2](https://gitlab.com/ravecat/selector-test-generator/compare/1.2.1...1.2.2) (2019-10-26)
 
 
