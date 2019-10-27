@@ -32,7 +32,7 @@
     "test:generate": "node dist/index.js ./app -s ./app/state.js",
     "release:debug": "semantic-release --debug",
     "lint": "eslint '**/*.js'",
-    "prettier": "prettier --check *"
+    "prettier": "prettier --check *.{css,md,yml,json}"
   },
   "dependencies": {
     "@babel/core": "^7.6.4",
@@ -80,7 +80,7 @@
       "eslint --fix",
       "git add"
     ],
-    "*.{md,yml,json}": [
+    "*.{css,md,yml,json}": [
       "prettier --write",
       "git add"
     ]
