@@ -5,8 +5,8 @@ cache:
     - node_modules/
 
 stages:
-  - open_mr
   - cleaning
+  - open_mr
   - preparation
   - test
   - release
@@ -16,6 +16,7 @@ cleaning:
   tags:
     - docker
   script:
+    - docker info
     - docker system prune -af
 
 open_mr_dependabot:
