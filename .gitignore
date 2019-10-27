@@ -3,6 +3,7 @@
 
 # testing
 /coverage
+/app/**/__test__
 
 # production
 /dist

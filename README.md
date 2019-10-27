@@ -72,7 +72,7 @@ For example, we have a folder with selectors in the root project directory
 
 ```bash
 <project>/
-├── selectors
+├── dir
 │   └── withSelectorNested.js
 ├── state.js
 ├── withoutSelector.js
@@ -81,11 +81,17 @@ For example, we have a folder with selectors in the root project directory
 
 ```
 
-and after running the script, we get the following result
+and after running the script
+
+```js
+npx selector-test-generator <project>/ -s <project>/state.js
+```
+
+we get the following result
 
 ```bash
 <project>/
-├── selectors
+├── dir
 │   ├── __test__
 │   │   └── withSelectorNested.js
 │   └── withSelectorNested.js
