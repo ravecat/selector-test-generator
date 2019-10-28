@@ -8,6 +8,7 @@ stages:
   - open_mr
   - preparation
   - test
+  - close_mr
   - release
   - cleaning
 
@@ -20,7 +21,32 @@ open_mr_dependabot:
     - /^dependabot.*$/
   script:
     - apk add --no-cache bash python3 curl git
-    - HOST=$CI_PROJECT_URL CI_PROJECT_ID=$CI_PROJECT_ID CI_COMMIT_REF_NAME=$CI_COMMIT_REF_NAME GITLAB_USER_ID=$GITLAB_USER_ID PRIVATE_TOKEN=$GITLAB_TOKEN ./utils/auto_mr_dependabot.sh
+    - HOST=$CI_PROJECT_URL
+      CI_PROJECT_ID=$CI_PROJECT_ID
+      CI_COMMIT_REF_NAME=$CI_COMMIT_REF_NAME
+      GITLAB_USER_ID=$GITLAB_USER_ID
+      PRIVATE_TOKEN=$GITLAB_TOKEN
+      ./utils/open_mr_dependabot.sh
+
+close_mr_dependabot:
+  image: node:10.13-alpine
+  stage: close_mr
+  tags:
+    - docker
+  only:
+    - /^dependabot.*$/
+  script:
+    - apk add --no-cache bash python3 curl
+    - HOST=$CI_PROJECT_URL
+      CI_PROJECT_ID=$CI_PROJECT_ID
+      CI_PROJECT_NAME=$CI_PROJECT_NAME
+      CI_COMMIT_REF_NAME=$CI_COMMIT_REF_NAME
+      CI_COMMIT_SHA=$CI_COMMIT_SHA
+      GITHUB_OWNER="ravecat"
+      GITLAB_USER_ID=$GITLAB_USER_ID
+      PRIVATE_TOKEN=$GITLAB_TOKEN
+      GITHUB_TOKEN=$GITHUB_REPO_TOKEN
+      ./utils/close_mr_dependabot.sh
 
 build_deps:
   image: node:10.13-alpine
