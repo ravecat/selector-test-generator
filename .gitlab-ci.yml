@@ -5,22 +5,11 @@ cache:
     - node_modules/
 
 stages:
-  - check
+  - open_mr
   - cleaning
   - preparation
   - test
   - release
-
-check:
-  image: node:10.13-alpine
-  stage: check
-  tags:
-    - docker
-  only:
-    - /^dependabot.*$/
-  script:
-    - apk add --no-cache git
-    - git branch -a
 
 cleaning:
   stage: cleaning
@@ -28,6 +17,17 @@ cleaning:
     - docker
   script:
     - docker system prune -af
+
+open_mr_dependabot:
+  image: node:10.13-alpine
+  stage: open_mr
+  tags:
+    - docker
+  only:
+    - /^dependabot.*$/
+  script:
+    - apk add --no-cache bash python3 curl
+    - HOST=$CI_PROJECT_URL CI_PROJECT_ID=$CI_PROJECT_ID CI_COMMIT_REF_NAME=$CI_COMMIT_REF_NAME GITLAB_USER_ID=$GITLAB_USER_ID PRIVATE_TOKEN=$GITLAB_TOKEN ./utils/autoMR.sh
 
 build_deps:
   image: node:10.13-alpine
@@ -38,8 +38,6 @@ build_deps:
     expire_in: 1h
   tags:
     - docker
-  except:
-    - /^dependabot.*$/
   dependencies: []
   script:
     - yarn
@@ -49,8 +47,6 @@ test_module:
   tags:
     - docker
   dependencies: []
-  except:
-    - /^dependabot.*$/
   script:
     - docker build . -t selector-test-generator
     - docker run --rm selector-test-generator
@@ -62,8 +58,6 @@ test_lint:
     - docker
   dependencies:
     - build_deps
-  except:
-    - /^dependabot.*$/
   script:
     - yarn lint
     - yarn prettier
@@ -75,8 +69,6 @@ release:
     - docker
   only:
     - master
-  except:
-    - /^dependabot.*$/
   dependencies:
     - build_deps
   script:
