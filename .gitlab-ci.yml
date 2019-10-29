@@ -5,10 +5,22 @@ cache:
     - node_modules/
 
 stages:
+  - check
   - cleaning
   - preparation
   - test
   - release
+
+check:
+  image: node:10.13-alpine
+  stage: check
+  tags:
+    - docker
+  only:
+    - /^dependabot.*$/
+  script:
+    - apk add --no-cache git
+    - git branch -a
 
 cleaning:
   stage: cleaning
@@ -26,6 +38,8 @@ build_deps:
     expire_in: 1h
   tags:
     - docker
+  except:
+    - /^dependabot.*$/
   dependencies: []
   script:
     - yarn
@@ -35,6 +49,8 @@ test_module:
   tags:
     - docker
   dependencies: []
+  except:
+    - /^dependabot.*$/
   script:
     - docker build . -t selector-test-generator
     - docker run --rm selector-test-generator
@@ -46,6 +62,8 @@ test_lint:
     - docker
   dependencies:
     - build_deps
+  except:
+    - /^dependabot.*$/
   script:
     - yarn lint
     - yarn prettier
@@ -57,6 +75,8 @@ release:
     - docker
   only:
     - master
+  except:
+    - /^dependabot.*$/
   dependencies:
     - build_deps
   script:
