@@ -5,19 +5,11 @@ cache:
     - node_modules/
 
 stages:
-  - cleaning
   - open_mr
   - preparation
   - test
   - release
-
-cleaning:
-  stage: cleaning
-  tags:
-    - docker
-  script:
-    - docker info
-    - docker system prune -af
+  - cleaning
 
 open_mr_dependabot:
   image: node:10.13-alpine
@@ -27,8 +19,8 @@ open_mr_dependabot:
   only:
     - /^dependabot.*$/
   script:
-    - apk add --no-cache bash python3 curl
-    - HOST=$CI_PROJECT_URL CI_PROJECT_ID=$CI_PROJECT_ID CI_COMMIT_REF_NAME=$CI_COMMIT_REF_NAME GITLAB_USER_ID=$GITLAB_USER_ID PRIVATE_TOKEN=$GITLAB_TOKEN ./utils/autoMR.sh
+    - apk add --no-cache bash python3 curl git
+    - HOST=$CI_PROJECT_URL CI_PROJECT_ID=$CI_PROJECT_ID CI_COMMIT_REF_NAME=$CI_COMMIT_REF_NAME GITLAB_USER_ID=$GITLAB_USER_ID PRIVATE_TOKEN=$GITLAB_TOKEN ./utils/auto_mr_dependabot.sh
 
 build_deps:
   image: node:10.13-alpine
@@ -63,6 +55,16 @@ test_lint:
     - yarn lint
     - yarn prettier
 
+test_build:
+  image: node:10.13-alpine
+  stage: test
+  tags:
+    - docker
+  dependencies:
+    - build_deps
+  script:
+    - yarn build
+
 release:
   image: node:10.13-alpine
   stage: release
@@ -77,3 +79,11 @@ release:
     - yarn build
     - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
     - GITLAB_TOKEN=$GITLAB_TOKEN yarn semantic-release
+
+cleaning:
+  stage: cleaning
+  tags:
+    - docker
+  script:
+    - docker info
+    - docker system prune -af

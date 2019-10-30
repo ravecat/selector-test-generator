@@ -5,13 +5,22 @@
 # Default branch
 TARGET_BRANCH=`curl --silent "${HOST}${CI_PROJECT_ID}" --header "PRIVATE-TOKEN:${PRIVATE_TOKEN}" | python3 -c "import sys, json; print(json.load(sys.stdin)['default_branch'])"`;
 
+echo "Current branch"
+echo ${CI_COMMIT_REF_NAME}
+
+echo "Fetch git data"
+git fetch -p
+
+echo "Rebase on default branch"
+git rebase origin/${TARGET_BRANCH}
+
 # The description of our new MR
-BODY="{
+GITLAB_MR_BODY="{
     \"id\": ${CI_PROJECT_ID},
     \"source_branch\": \"${CI_COMMIT_REF_NAME}\",
     \"target_branch\": \"${TARGET_BRANCH}\",
     \"remove_source_branch\": true,
-    \"title\": \"refactor(dependabot): ${CI_COMMIT_REF_NAME}\",
+    \"title\": \"${CI_COMMIT_REF_NAME}\",
     \"assignee_id\":\"${GITLAB_USER_ID}\"
 }";
 
@@ -25,9 +34,9 @@ if [ ${COUNTBRANCHES} -eq "0" ]; then
     curl -X POST "${HOST}${CI_PROJECT_ID}/merge_requests" \
         --header "PRIVATE-TOKEN:${PRIVATE_TOKEN}" \
         --header "Content-Type: application/json" \
-        --data "${BODY}";
+        --data "${GITLAB_MR_BODY}";
 
-    echo "Opened a new merge request: WIP: ${CI_COMMIT_REF_NAME} and assigned to you";
+    echo "Opened a new merge request: ${CI_COMMIT_REF_NAME} and assigned to you";
     exit;
 fi
 
