@@ -1,4 +1,4 @@
-image: docker:stable
+image: docker:latest
 
 cache:
   paths:
@@ -70,6 +70,16 @@ test_module:
     - docker build . -t selector-test-generator
     - docker run --rm selector-test-generator
 
+test_build:
+  image: node:10.13-alpine
+  stage: test
+  tags:
+    - docker
+  dependencies:
+    - build_deps
+  script:
+    - yarn build
+
 test_lint:
   image: node:10.13-alpine
   stage: test
@@ -80,16 +90,6 @@ test_lint:
   script:
     - yarn lint
     - yarn prettier
-
-test_build:
-  image: node:10.13-alpine
-  stage: test
-  tags:
-    - docker
-  dependencies:
-    - build_deps
-  script:
-    - yarn build
 
 release:
   image: node:10.13-alpine
