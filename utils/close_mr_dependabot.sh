@@ -21,7 +21,7 @@ if [ ${COUNTBRANCHES} -ne "0" ]; then
 
     curl -X PATCH "https://api.github.com/repos/${GITHUB_OWNER}/${CI_PROJECT_NAME}/pulls/${MR_NUMBER_GITHUB}" \
         --header "Accept: application/vnd.github.v3+json" \
-        --header "Authorization: ${GITHUB_TOKEN}" \
+        --header "Authorization: token ${GITHUB_TOKEN}" \
         --header "Content-Type: application/json" \
         --data "${GITHUB_MR_BODY}";
     exit;
