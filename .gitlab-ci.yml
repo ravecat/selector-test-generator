@@ -54,6 +54,8 @@ build_deps:
     paths:
       - node_modules/
     expire_in: 1h
+  except:
+    - develop
   tags:
     - docker
   dependencies: []
@@ -64,6 +66,8 @@ test_module:
   stage: test
   tags:
     - docker
+  except:
+    - develop
   dependencies: []
   script:
     - docker build . -t selector-test-generator
@@ -74,6 +78,8 @@ test_build:
   stage: test
   tags:
     - docker
+  except:
+    - develop
   dependencies:
     - build_deps
   script:
@@ -84,6 +90,8 @@ test_lint:
   stage: test
   tags:
     - docker
+  except:
+    - develop
   dependencies:
     - build_deps
   script:
