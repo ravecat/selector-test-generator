@@ -11,18 +11,9 @@ echo ${CI_COMMIT_REF_NAME}
 echo "Fetch git data"
 git fetch -p
 
+# Debatable decision, but it is necessary to obtain live information
 echo "Rebase on default branch"
 git rebase origin/${TARGET_BRANCH}
-
-# The description of our new MR
-GITLAB_MR_BODY="{
-    \"id\": ${CI_PROJECT_ID},
-    \"source_branch\": \"${CI_COMMIT_REF_NAME}\",
-    \"target_branch\": \"${TARGET_BRANCH}\",
-    \"remove_source_branch\": true,
-    \"title\": \"${CI_COMMIT_REF_NAME}\",
-    \"assignee_id\":\"${GITLAB_USER_ID}\"
-}";
 
 # Require a list of all the merge request and take a look if there is already
 # one with the same source branch
@@ -31,6 +22,16 @@ COUNTBRANCHES=`echo ${LISTMR} | grep -o "\"source_branch\":\"${CI_COMMIT_REF_NAM
 
 # Create MR
 if [ ${COUNTBRANCHES} -eq "0" ]; then
+    # The description of our new MR
+    GITLAB_MR_BODY="{
+        \"id\": ${CI_PROJECT_ID},
+        \"source_branch\": \"${CI_COMMIT_REF_NAME}\",
+        \"target_branch\": \"${TARGET_BRANCH}\",
+        \"remove_source_branch\": true,
+        \"title\": \"${CI_COMMIT_REF_NAME}\",
+        \"assignee_id\":\"${GITLAB_USER_ID}\"
+    }";
+
     curl -X POST "${HOST}${CI_PROJECT_ID}/merge_requests" \
         --header "PRIVATE-TOKEN:${PRIVATE_TOKEN}" \
         --header "Content-Type: application/json" \
