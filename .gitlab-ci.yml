@@ -110,6 +110,8 @@ cleaning:
   stage: cleaning
   tags:
     - docker
+  only:
+    - develop
   script:
     - docker info
     - docker system prune -af
