@@ -39,7 +39,7 @@
     "@babel/parser": "^7.6.4",
     "@babel/preset-env": "^7.6.3",
     "@babel/register": "^7.6.2",
-    "commander": "^3.0.2",
+    "commander": "^4.0.0",
     "outdent": "^0.7.0"
   },
   "devDependencies": {
