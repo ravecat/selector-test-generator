@@ -19,15 +19,15 @@ if [ ${COUNTBRANCHES} -ne "0" ]; then
     
     echo "Available github MR with number ${MR_NUMBER_GITHUB}"
 
-    # GITHUB_MR_BODY="{
-    #     \"state\": \"closed\"
-    # }";
+    GITHUB_MR_BODY="{
+        \"state\": \"closed\"
+    }";
 
-    # curl -X PATCH "https://api.github.com/repos/${GITHUB_OWNER}/${CI_PROJECT_NAME}/pulls/${MR_NUMBER_GITHUB}" \
-    #     --header "Accept: application/vnd.github.v3+json" \
-    #     --header "Authorization: token ${GITHUB_TOKEN}" \
-    #     --header "Content-Type: application/json" \
-    #     --data "${GITHUB_MR_BODY}";
+    curl -X PATCH "https://api.github.com/repos/${GITHUB_OWNER}/${CI_PROJECT_NAME}/pulls/${MR_NUMBER_GITHUB}" \
+        --header "Accept: application/vnd.github.v3+json" \
+        --header "Authorization: token ${GITHUB_TOKEN}" \
+        --header "Content-Type: application/json" \
+        --data "${GITHUB_MR_BODY}";
     exit;
   fi
 fi
