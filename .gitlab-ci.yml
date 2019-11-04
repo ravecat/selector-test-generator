@@ -19,6 +19,7 @@ open_mr_dependabot:
     - docker
   only:
     - /^dependabot.*$/
+  dependencies: []
   script:
     - apk add --no-cache bash python3 curl git
     - HOST=$CI_PROJECT_URL
@@ -35,6 +36,7 @@ close_mr_dependabot:
     - docker
   only:
     - /^dependabot.*$/
+  dependencies: []
   script:
     - apk add --no-cache bash python3 curl
     - HOST=$CI_PROJECT_URL
@@ -119,6 +121,7 @@ cleaning:
     - docker
   only:
     - develop
+  dependencies: []
   script:
     - docker info
     - docker system prune -af
