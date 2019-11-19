@@ -1,3 +1,10 @@
+## [1.2.5](https://gitlab.com/ravecat/selector-test-generator/compare/1.2.4...1.2.5) (2019-11-19)
+
+
+### Bug Fixes
+
+* fix incorrect display of objects in generated tests ([f3d9f1c](https://gitlab.com/ravecat/selector-test-generator/commit/f3d9f1c))
+
 ## [1.2.4](https://gitlab.com/ravecat/selector-test-generator/compare/1.2.3...1.2.4) (2019-10-27)
 
 ## [1.2.3](https://gitlab.com/ravecat/selector-test-generator/compare/1.2.2...1.2.3) (2019-10-27)
