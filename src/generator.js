@@ -30,7 +30,7 @@ function generateTestContent(selectors, fileName, path, statePath) {
             return `
   it('${name}', () => {
     const received = ${name}(state);
-    const expected = ${typeof expected === 'string' ? `'${expected}'` : expected};
+    const expected = ${JSON.stringify(expected)};
 
     expect(received).toEqual(expected);
   });`;
@@ -64,7 +64,6 @@ function generateTest(file, selectors, statePath) {
   const testFile = resolve(testDir, testName);
 
   if (!existsSync(testDir)) mkdirSync(testDir);
-
   const content = generateTestContent(selectors, testName, file, statePath);
 
   try {
